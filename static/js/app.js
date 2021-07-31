@@ -1,8 +1,8 @@
-// // import the data from data.js
-// const tableData = data;
+// import the data from data.js
+const tableData = data;
 
-// // Reference the HTML table using d3
-// var tbody = d3.select("tbody");
+// Reference the HTML table using d3
+var tbody = d3.select("tbody");
 
 // // Original addition function
 // function addition(a, b) {
@@ -32,12 +32,28 @@ function buildTable(data) {
   function handleClick() {
     // Grab the datetime value from the filter
     let date = d3.select("#datetime").property("value");
+    let city = d3.select("#city").property("value");
+    let state = d3.select("#state").property("value");
+    let country = d3.select("#country").property("value");
+    let shape = d3.select("#shape").property("value");
     let filteredData = tableData;
   
      // Check to see if a date was entered and filter the data using that date.
     if (date) {
       // Apply `filter` to the table data to only keep the rows where the `datetime` value matches the filter value
       filteredData = filteredData.filter(row => row.datetime === date);
+    }
+    if (city) {
+        filteredData = filteredData.filter(row => row.city.toLowerCase() == city.toLowerCase());
+    }
+    if (state) {
+        filteredData = filteredData.filter(row => row.state.toLowerCase() == state.toLowerCase());
+    }
+    if (country) {
+        filteredData = filteredData.filter(row => row.country.toLowerCase() == country.toLowerCase());
+    }
+    if (shape) {
+        filteredData = filteredData.filter(row => row.shape.toLowerCase() == shape.toLowerCase());
     }
   
      // Rebuild the table using the filtered data
